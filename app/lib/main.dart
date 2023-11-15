@@ -1,11 +1,14 @@
 
-import 'package:app/firebase_options.dart';
-import 'package:app/inicio_sesion.dart';
-import 'package:app/miswidgets/elemento_dieta.dart';
+import 'package:app/servicios/firebase_options.dart';
+import 'package:app/miswidgets/entrada_texto.dart';
+import 'package:app/miswidgets/entrada_texto_contraseNa.dart';
+import 'package:app/miswidgets/miboton.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() async{
+import 'ventanas/moin.dart';
+
+void main() async {    
   try {
     WidgetsFlutterBinding.ensureInitialized();
   } catch (e){
@@ -15,66 +18,66 @@ e;
   await Firebase.initializeApp(
 options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  runApp(const MyApp());
+  runApp(InicioSesion());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
+class InicioSesion extends StatelessWidget {
+  const InicioSesion({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: InicioSesion(),
-    );
+    return const MaterialApp(home: MiInicioSesion());
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-  
+class MiInicioSesion extends StatefulWidget {
+  const MiInicioSesion({super.key});
+
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<StatefulWidget> createState() {
+    return Forma();
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-
-List<String> comidas = ["Huevo","Manzana","Pollo","Proteina","...Añadir"];
-
-
+class Forma extends State<MiInicioSesion> {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-     body: Column(
+      body: Stack(
+        children: [
+          Icon(Icons.food_bank),
+          Container(
+          width: MediaQuery.of(context).size.width,
+          height: (MediaQuery.of(context).size.height) / 3,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+                colors: [Colors.green, Color.fromARGB(255, 44, 117, 2)]),
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+        ),
 
-      children: [
-        
-        Expanded(
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 5,
-            itemBuilder:(context,index){
-              return elementoDieta(nombre: comidas[index]);
-            } ),
-        )
-      ],
 
 
-     )
-    );
+          Center(
+            child: ListView(
+            padding: const EdgeInsets.all(8),
+            children: [
+              SizedBox(
+  height: (MediaQuery.sizeOf(context).height)/2.5
+  ),     const  Center(
+          child: Text("Bienvenido", style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.green,
+          fontSize: 60,)),),
+           const SizedBox(height: 30,),   
+           entradaTexto(),
+            const SizedBox(height: 30,), 
+           EntradaTextoContrasena(),
+        const   SizedBox(height: 50,), 
+miBoton(contexto:context,ruta:MyApp()),
+           ]
+         ), ),
+     ] 
+    ),);
   }
 }
