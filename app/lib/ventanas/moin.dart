@@ -1,13 +1,8 @@
 
-
-import 'package:app/main.dart';
 import 'package:flutter/material.dart';
-
-
 
 class MyApp extends StatelessWidget {
 
-  
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -42,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(title: const Text("Fer")),
      body: Column(
       children: [
-        SizedBox(
+       const SizedBox(
           height: 10,
         ),
       Center(
@@ -51,27 +46,27 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Container(
 
             decoration: BoxDecoration(
-            image: DecorationImage(
-              image: const AssetImage("recursos/ensalada.jpg"),
+            image: const DecorationImage(
+              image:  AssetImage("recursos/ensalada.jpg"),
               fit: BoxFit.cover,
             ),
             shape: BoxShape.rectangle,
             borderRadius:BorderRadius.circular(50),
             ),
-            child:Container (
-                padding:EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.center,
-                  colors:[Colors.green,Colors.transparent] ),
-              ),
-            ),
+
           width: MediaQuery.of(context).size.width-50,
           height: (MediaQuery.of(context).size.height) / 3,
           
-
+            child:Container (
+                padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      gradient: const LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.center,
+                          colors: [Colors.green, Colors.transparent]),
+              ),
+            ),
           ),
 
         ),

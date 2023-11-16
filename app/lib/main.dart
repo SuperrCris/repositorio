@@ -1,4 +1,5 @@
 
+import 'package:app/miswidgets/contenedor.dart';
 import 'package:app/servicios/firebase_options.dart';
 import 'package:app/miswidgets/entrada_texto.dart';
 import 'package:app/miswidgets/entrada_texto_contraseNa.dart';
@@ -44,6 +45,17 @@ class Forma extends State<MiInicioSesion> {
     return Scaffold(
       body: Stack(
         children: [
+          Container(
+          width: MediaQuery.of(context).size.width,
+          height: (MediaQuery.of(context).size.height),
+            decoration: BoxDecoration(
+              
+            image: DecorationImage(
+              image: AssetImage("recursos/imagengrande.png"),
+              repeat: ImageRepeat.repeat,
+),
+            ),
+          ),
           Icon(Icons.food_bank),
           Container(
           width: MediaQuery.of(context).size.width,
@@ -56,25 +68,32 @@ class Forma extends State<MiInicioSesion> {
           ),
         ),
 
-
-
           Center(
             child: ListView(
             padding: const EdgeInsets.all(8),
             children: [
               SizedBox(
-  height: (MediaQuery.sizeOf(context).height)/2.5
-  ),     const  Center(
-          child: Text("Bienvenido", style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.green,
-          fontSize: 60,)),),
-           const SizedBox(height: 30,),   
-           entradaTexto(),
-            const SizedBox(height: 30,), 
-           EntradaTextoContrasena(),
-        const   SizedBox(height: 50,), 
-miBoton(contexto:context,ruta:MyApp()),
+  height: (MediaQuery.sizeOf(context).height)/2.9
+  ),     
+ 
+
+     Contenedor(cosas: Column(
+  children:[
+   const Text("Bienvenido",style: TextStyle(fontSize: 50), textAlign: TextAlign.left,),
+      const Text("Inicia sesion",style: TextStyle(fontSize: 15), ),
+ const SizedBox(height: 30,),
+entradaTexto(),
+ const SizedBox(height: 30,),
+EntradaTextoContrasena(),
+ const SizedBox(height: 30,),
+ miBoton(contexto: context, ruta:  const MyApp())
+]
+
+), ),
+          
+       
+
+
            ]
          ), ),
      ] 

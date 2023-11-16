@@ -28,6 +28,7 @@ return  TextFormField(
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
+        fillColor: Colors.white,
         labelText:"Correo electronico",
         hintText: "soysano@hotmail.com",
         prefixIcon: Icon(Icons.mail),
