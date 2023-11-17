@@ -1,4 +1,5 @@
 
+import 'package:app/miswidgets/botonactividad.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -34,18 +35,22 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Fer")),
      body: Column(
       children: [
        const SizedBox(
-          height: 10,
+          height: 50,
         ),
       Center(
-        child: ClipRRect(
+
           
           child: Container(
 
             decoration: BoxDecoration(
+                boxShadow:const [BoxShadow(
+    color: Colors.black45,
+    offset: Offset(0, 1),
+    blurRadius: 15,
+              ),     ]  , 
             image: const DecorationImage(
               image:  AssetImage("recursos/ensalada.jpg"),
               fit: BoxFit.cover,
@@ -71,7 +76,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
         ),
 
-      ),
+
+
+           const SizedBox(height: 20,),
+      miBotonAct(titulo:"Mis comidas", icono:Icons.dining),
+           const   SizedBox(height: 20,),
+     miBotonAct(titulo:"Mi dieta", icono:Icons.list_sharp),
+              const      SizedBox(height: 20,),
+      miBotonAct(titulo:"Mis estadisticas", icono:Icons.flag),
+      
       ],
 
 

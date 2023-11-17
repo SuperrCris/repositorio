@@ -51,7 +51,7 @@ class Forma extends State<MiInicioSesion> {
             decoration: BoxDecoration(
               
             image: DecorationImage(
-              image: AssetImage("recursos/imagengrande.png"),
+              image: AssetImage("recursos/imagen2.png"),
               repeat: ImageRepeat.repeat,
 ),
             ),
@@ -79,7 +79,7 @@ class Forma extends State<MiInicioSesion> {
 
      Contenedor(cosas: Column(
   children:[
-   const Text("Bienvenido",style: TextStyle(fontSize: 50), textAlign: TextAlign.left,),
+   const Text("Bienvenido",style: TextStyle(fontSize: 50,color: Colors.greenAccent), textAlign: TextAlign.left,),
       const Text("Inicia sesion",style: TextStyle(fontSize: 15), ),
  const SizedBox(height: 30,),
 entradaTexto(),
