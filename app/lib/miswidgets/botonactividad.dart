@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 
 class miBotonAct extends StatelessWidget{
-  String? titulo;
-  IconData? icono;
+  late String? titulo;
+  late IconData? icono;
   miBotonAct({this.titulo,this.icono});
   @override
   Widget build(BuildContext context) {

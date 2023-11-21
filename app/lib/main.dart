@@ -6,7 +6,7 @@ import 'package:app/miswidgets/entrada_texto_contraseNa.dart';
 import 'package:app/miswidgets/miboton.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:ui' ;
 import 'ventanas/moin.dart';
 
 void main() async {    
@@ -60,6 +60,7 @@ class Forma extends State<MiInicioSesion> {
           Container(
           width: MediaQuery.of(context).size.width,
           height: (MediaQuery.of(context).size.height) / 3,
+          child: Icon(Icons.account_circle_rounded,size:100,color:Colors.white,),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
                 colors: [Colors.green, Color.fromARGB(255, 44, 117, 2)]),
@@ -79,7 +80,7 @@ class Forma extends State<MiInicioSesion> {
 
      Contenedor(cosas: Column(
   children:[
-   const Text("Bienvenido",style: TextStyle(fontSize: 50,color: Colors.greenAccent), textAlign: TextAlign.left,),
+   const Text("Bienvenido",style: TextStyle(fontSize: 50,color: Color.fromARGB(255, 4, 119, 69)), textAlign: TextAlign.left,),
       const Text("Inicia sesion",style: TextStyle(fontSize: 15), ),
  const SizedBox(height: 30,),
 entradaTexto(),
