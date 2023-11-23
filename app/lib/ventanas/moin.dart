@@ -1,6 +1,8 @@
 
 import 'package:app/miswidgets/barradatos.dart';
 import 'package:app/miswidgets/botonactividad.dart';
+import 'package:app/miswidgets/datosprogresoinicial.dart';
+import 'package:app/ventanas/botshe_a%C3%B1adir.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' ;
 
@@ -95,7 +97,7 @@ Container(
     foregroundColor: MaterialStateProperty.all<Color>(Colors.green),
   ),
   onPressed: () { },
-  child: Text('Añadir'),
+  child: Text('Ver mas'),
 )),
             ]
             ),
@@ -106,14 +108,23 @@ Container(
               
               children: [gridelemento(),SizedBox(width: 5,),gridelemento(),SizedBox(width: 5,),gridelemento(),SizedBox(width: 5,),gridelemento(),SizedBox(width: 5,),gridelemento(),],
             ),),),
-               SizedBox(height: 50,),
+               SizedBox(height: 25,),
            ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  minimumSize:Size(100, 40) ,
                   backgroundColor: Colors.green),
-                child: Text("Ver mi dieta",style: TextStyle(color: Colors.white),),
-               onPressed: () => print("presionado"),
-              ),
-        
+                child: Text("Añadir",style: TextStyle(color: Colors.white),),
+               onPressed: () => 
+               showModalBottomSheet(context: context,
+                builder: (BuildContext context){
+
+                  return SizedBox(
+                    height: 400,
+                    child: Center(child: contextoanadir(),)
+                  );
+                },
+              )),
+         SizedBox(height: 10,),
            ],
           )
            ),
@@ -261,17 +272,7 @@ class grid extends StatelessWidget {
 
 
 
-class Datos extends StatelessWidget{
-  String? texto;
-  IconData? icono;
-  Datos({super.key,this.texto,this.icono});
-  @override
 
-  Widget build(BuildContext context) {
-return Row(
-children:[Icon(icono),Text("$texto",)]
-);  }
-}
 
 
 
