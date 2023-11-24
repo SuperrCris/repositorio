@@ -3,6 +3,7 @@ import 'package:app/miswidgets/barradatos.dart';
 import 'package:app/miswidgets/botonactividad.dart';
 import 'package:app/miswidgets/datosprogresoinicial.dart';
 import 'package:app/ventanas/botshe_a%C3%B1adir.dart';
+import 'package:app/ventanas/botshe_nuevo.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' ;
 
@@ -116,11 +117,11 @@ Container(
                 child: Text("Añadir",style: TextStyle(color: Colors.white),),
                onPressed: () => 
                showModalBottomSheet(context: context,
+               isScrollControlled: true,
                 builder: (BuildContext context){
-
-                  return SizedBox(
-                    height: 400,
-                    child: Center(child: contextoanadir(),)
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: Nuevacomida(),
                   );
                 },
               )),
