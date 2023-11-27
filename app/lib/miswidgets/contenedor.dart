@@ -22,12 +22,7 @@ con(this.cosas);
 decoration: BoxDecoration(
   color: Colors.white,
   borderRadius: BorderRadius.circular(30),
-  boxShadow:const [BoxShadow(
-    color: Colors.black45,
-    offset: Offset(0, 1),
-    blurRadius: 15,
-    ),
-  ]
+
   
 ),  child: cosas,  );
   }

@@ -4,6 +4,7 @@ import 'package:app/servicios/firebase_options.dart';
 import 'package:app/miswidgets/entrada_texto.dart';
 import 'package:app/miswidgets/entrada_texto_contraseNa.dart';
 import 'package:app/miswidgets/miboton.dart';
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' ;
@@ -12,6 +13,9 @@ import 'ventanas/moin.dart';
 void main() async {    
   try {
     WidgetsFlutterBinding.ensureInitialized();
+          WidgetsFlutterBinding.ensureInitialized();
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
   } catch (e){
 e;
   }
@@ -49,26 +53,10 @@ class Forma extends State<MiInicioSesion> {
           width: MediaQuery.of(context).size.width,
           height: (MediaQuery.of(context).size.height),
             decoration: BoxDecoration(
-              
-            image: DecorationImage(
-              image: AssetImage("recursos/imagen2.png"),
-              repeat: ImageRepeat.repeat,
-),
+
             ),
           ),
           Icon(Icons.food_bank),
-          Container(
-          width: MediaQuery.of(context).size.width,
-          height: (MediaQuery.of(context).size.height) / 3,
-          child: Icon(Icons.account_circle_rounded,size:100,color:Colors.white,),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-                colors: [Colors.green, Color.fromARGB(255, 44, 117, 2)]),
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-        ),
-
           Center(
             child: ListView(
             padding: const EdgeInsets.all(8),

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class Barradatos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
 
     return 
 
@@ -49,7 +48,7 @@ class Barradatos extends StatelessWidget {
       ),
       
               Row(
-      children:[
+        children:[
         Padding(padding:EdgeInsets.symmetric(horizontal:26),child: Text("Has bajado 3.2 de 32 kilos", style: TextStyle( fontFamily: 'figtree', fontSize:15,fontWeight: FontWeight.bold,)),),
         Expanded (child:SizedBox(),),
         Padding(padding:EdgeInsets.symmetric(horizontal:20),child: Text("Ultima consulta: 20/11/2023", style: TextStyle( fontFamily: 'figtree', fontSize:15,fontWeight: FontWeight.bold,)),),    

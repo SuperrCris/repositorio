@@ -9,9 +9,11 @@ import 'dart:ui' ;
 
 class MyApp extends StatelessWidget {
 
+
+
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -153,7 +155,9 @@ Container(
 
 
 class Actividades extends StatelessWidget{
+  const Actividades({super.key});
 
+@override
   Widget build(BuildContext context) {
 
     return Expanded(
@@ -173,10 +177,9 @@ class Actividades extends StatelessWidget{
 class Miboton extends StatelessWidget {
   String? titulo;
   IconData? icono;
-  Miboton({this.titulo, this.icono});
+  Miboton({super.key, this.titulo, this.icono});
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
@@ -195,7 +198,7 @@ class Miboton extends StatelessWidget {
               size: 20,
             ),
           ),
-          SizedBox(width: 10),
+        const SizedBox(width: 10),
           Text(titulo.toString(),
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
