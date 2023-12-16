@@ -1,4 +1,5 @@
 
+import 'package:app/miswidgets/porcentajecirculo.dart';
 import 'package:app/ventanas/moin.dart';
 import 'package:flutter/material.dart';
 
