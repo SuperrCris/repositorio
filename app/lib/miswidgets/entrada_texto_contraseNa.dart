@@ -16,6 +16,7 @@ class entrada extends State<EntradaTextoContrasena>
   void initState() {
     super.initState();
       emailController.addListener(()=> setState(() {}));
+      print("borrado");
   }
 
 
@@ -26,11 +27,14 @@ return  TextFormField(
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
       obscureText: esVisible,
-      textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        labelText:"Contraseña",
+        hintText:"Contraseña",
         prefixIcon: Icon(Icons.key),
-        border: OutlineInputBorder(),
+        fillColor: Colors.white,
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(90.0),
+        ),
         suffixIcon: IconButton(
           icon: esVisible
         ? Icon(Icons.visibility_off_outlined)

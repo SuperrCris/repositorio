@@ -1,0 +1,84 @@
+
+    $("#btnCompras").click(function (e) {
+    e.preventDefault();
+    console.log("Entrar");
+    var parametros = "tipo=individual";
+
+    $.ajax({
+        accept: "application/x-www-form-urlencoded",
+        method: "POST",
+        url: "/ejemploajax_servlets/controladorCarritos",
+        data: parametros
+    }).done(function (respuesta) {
+        var objJSON = JSON.parse(respuesta);
+
+        // Eliminar el list-group si existe
+        if ($("#listaUsuarios").length)
+            $("#listaUsuarios").remove();
+
+        var $body = $("body");
+
+        var $listGroup = $("<ul></ul>").attr({
+            id: "listaUsuarios",
+            class: "list-group"
+        });
+
+        // Recorrer objetos de objeto JSON de la respuesta del servidor
+        for (fila of objJSON.listado) {
+            console.log(fila.idusuario + ' ' + fila.listacompras);
+            
+            var liElement = document.createElement("a");
+            liElement.classList.add("list-group-item", "list-group-item-action");
+
+            var divElement = document.createElement("div");
+            divElement.classList.add("container");
+
+            var row = document.createElement("div");
+            row.classList.add("row");
+
+            var divColumna1 = document.createElement("div");
+            var divColumna2 = document.createElement("div");
+            divColumna1.classList.add("col","d-flex", "justify-content-right");
+            divColumna2.classList.add("col","d-flex","justify-content-right");
+
+            var h5Element = document.createElement("h5");
+            h5Element.textContent = fila.listacompras;
+
+            var btnX = document.createElement("button");
+            btnX.id = "btn";
+            var btnMas = document.createElement("button");
+            var btnMenos = document.createElement("button");
+            var inputCantidad = document.createElement("input");
+            inputCantidad.id = "cantidad";
+            inputCantidad.classList.add("form-control", "form-control-lg");
+            
+           
+            btnX.classList.add("btn", "btn-outline-danger");
+            btnMas.classList.add("btn", "btn-outline-info");
+            btnMenos.classList.add("btn", "btn-outline-info");
+            btnX.textContent = "X";
+            btnMas.textContent = "+";
+            btnMenos.textContent = "-";
+
+            divColumna1.appendChild(h5Element);
+            divColumna2.appendChild(btnMas);
+            divColumna2.appendChild(inputCantidad);
+            divColumna2.appendChild(btnMenos);
+            divColumna2.appendChild(btnX);
+
+            row.appendChild(divColumna1);
+            row.appendChild(divColumna2);
+
+            divElement.appendChild(row);
+
+            liElement.appendChild(divElement);
+
+            // Agregar el liElement al list-group
+            $listGroup.append(liElement);
+        }
+
+        // Agregar el list-group al cuerpo del documento
+        $body.append($listGroup);
+    });
+});
+  

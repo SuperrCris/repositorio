@@ -17,11 +17,19 @@ con(this.cosas);
   Widget build(BuildContext context) {
   return Container(
   padding: EdgeInsets.all(20),
-  margin: const EdgeInsets.symmetric(horizontal: 30),      
+    
  width: double.infinity,
 decoration: BoxDecoration(
-  color: Colors.white,
-  borderRadius: BorderRadius.circular(30),
+gradient: LinearGradient(
+          colors: [Color.fromARGB(255, 123, 226, 126), Colors.green],
+          stops: [0.005, 0.02],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        )
+      ,
+  borderRadius: BorderRadius.only(
+    topRight: Radius.circular(90)
+  ),
 
   
 ),  child: cosas,  );

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app/miswidgets/contenedor.dart';
+import 'package:app/miswidgets/estilos/textos.dart';
 import 'package:app/servicios/camara.dart';
 import 'package:app/servicios/otracamara.dart';
 import 'package:camera/camera.dart';
@@ -115,28 +116,24 @@ setState(() {
   }
 
   BoxDecoration decoracion(){
-BoxDecoration BD = BoxDecoration();
+BoxDecoration bd = BoxDecoration();
 
 if (imagenes.isNotEmpty){
-  
-  BD = BoxDecoration(
+  bd = BoxDecoration(
   image: DecorationImage(image: FileImage(File(imagenes.last.path)),
   fit: BoxFit.cover),);
-
 } else {
-       BD    =    BoxDecoration(
+       bd    =    BoxDecoration(
             color:  Color.fromARGB(255, 12, 12, 12), 
           );
 }
 
 
-    return BD;
+    return bd;
   }
 }
 
  XFile? imagen;
-const TextStyle estilo50 = TextStyle( fontFamily: 'figtree', fontSize:50,fontWeight: FontWeight.bold);
-const TextStyle estilo12verde = TextStyle( fontFamily: 'figtree', fontSize:12,fontWeight: FontWeight.bold,color: const Color.fromARGB(255, 58, 183, 68));
 
 
  

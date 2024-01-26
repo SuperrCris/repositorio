@@ -1,47 +1,36 @@
 import 'package:flutter/material.dart';
 
-class entradaTexto extends StatefulWidget{
+class entradaTexto extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-return entrada();
-
-  }
+  _EmailFieldState createState() => _EmailFieldState();
 }
-class entrada extends State<entradaTexto>
 
-{
-    final emailController = TextEditingController();
-    
+class _EmailFieldState extends State<entradaTexto> {
+  TextEditingController emailControlador= TextEditingController();
+  bool tieneTexto = false;
   @override
   void initState() {
     super.initState();
-      emailController.addListener(()=> setState(() {}));
+      emailControlador.addListener(()=> setState(() {}));
+      print("Estado de email cambiado");
   }
-
-
-
   @override
   Widget build(BuildContext context) {
-return  TextFormField(
-     
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
-      textInputAction: TextInputAction.done,
+    return TextFormField(
+      controller: emailControlador,
       decoration: InputDecoration(
+        prefixIcon: Icon(Icons.email),
+        hintText: 'Correo electronico',
         fillColor: Colors.white,
-        labelText:"Correo electronico",
-        hintText: "soysano@hotmail.com",
-        prefixIcon: Icon(Icons.mail),
-        border: OutlineInputBorder(),
-        suffixIcon: emailController.text.isEmpty
-        ? Container(width: 0)
-        : IconButton(
-         icon: Icon(Icons.close), 
-         onPressed: () => emailController.clear(),),
-      ),
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(90.0),
+        ),
+       suffixIcon:  emailControlador.text.isNotEmpty
+        ? IconButton(icon: Icon(Icons.close), onPressed: ()=>setState (()=>emailControlador.clear()))
+        : null,
+     
+   )
     );
-
-
-
   }
 }
