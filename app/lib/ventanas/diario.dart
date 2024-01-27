@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
              var datos;
                 datos = snapshot.data?.elementAt(i) ;
-              return EleDiario(comida: datos!['nombre'], estado: Estado.registrado,);
+              return Elediario(comida: datos!['nombre'], estado: Estado.registrado,);
 
             },
             );
@@ -127,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
         .collection('Cristian')
         .doc('Dietas')
         .collection('24-01-2024').get();
+        
  var documentosMap = {};
   for (var documento in snapshot.docs) {
     documentosMap[documento.id] = documento;

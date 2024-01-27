@@ -1,17 +1,58 @@
-import 'package:flutter/material.dart';
+import 'dart:typed_data';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 enum Estado {
 registrado,distinto, desconocido,noregistrado,espera
 }
 
+class Elediario extends StatefulWidget {
 
-class EleDiario extends StatelessWidget {
+  final String comida;
+final Estado estado;
+
+
+  const Elediario({super.key, required this.comida,required this.estado}) : super();
+
+  @override
+  // ignore: no_logic_in_create_state
+  State<Elediario> createState() => DiarioEstado(comida,estado);
+}
+
+class DiarioEstado extends State<Elediario> {
+
 final String comida;
 final Estado estado;
-const EleDiario({super.key, required this.comida,required this.estado});
+
+DiarioEstado(this.comida, this.estado,);
+ String imageUrl = ''; // URL de la imagen en Firebase Storage
+
+  // Función para descargar la imagen desde Firebase Storage
+  Future<void> downloadImage() async {
+    // Reemplaza 'tu/ruta/a/la/imagen.jpg' con la ruta de tu imagen en Firebase Storage
+    Reference ref = FirebaseStorage.instance.ref().child('fotos/usuarios/cristian/24-01-2024/atun.jpg');
+
+    try {
+      String downloadUrl = await ref.getDownloadURL();
+      setState(() {
+        imageUrl = downloadUrl;
+      });
+    } catch (e) {
+      print('Error al descargar la imagen: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    downloadImage();
+  }
 
   @override
   Widget build(BuildContext context) {
+ 
+  
     return  Container(
 
           margin: EdgeInsets.all(5),
@@ -24,7 +65,7 @@ const EleDiario({super.key, required this.comida,required this.estado});
           child:Row(
           children:[
      
-             marca(estado),
+             marca(estado, imageUrl),
             
             Expanded(child:Container(
             alignment:Alignment.centerLeft,
@@ -59,7 +100,20 @@ const EleDiario({super.key, required this.comida,required this.estado});
 }
 
 
-Container marca (Estado _tipo) {
+
+
+
+
+
+
+
+
+
+
+
+
+Container marca (Estado _tipo, String url) {
+  String ur = url;
   Estado tipo = _tipo;
   Container contenedor;
   Icon icon;
@@ -109,14 +163,29 @@ contenedor =
               ),
             child: Stack(children:[
               
-              Container(
+              SizedBox(
                 height:70,
                 width:70,
-                  decoration:BoxDecoration(
-              shape:BoxShape.circle,
-              color:Colors.cyan,
+                  child:
+                   ur == null
+            ? const CircularProgressIndicator(color: Colors.grey,)
+            : Container(
+        
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                      color: Colors.green,
+                ),
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: ur,
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-              ),
+            ),
+                  
+                  ),
+      
+              
               Positioned(
                 bottom: 1,
                 right: 1,
@@ -133,3 +202,8 @@ contenedor =
             );
 return contenedor;
 }
+
+
+
+
+
