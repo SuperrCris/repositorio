@@ -2,16 +2,14 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:app/miswidgets/estilos/textos.dart';
+
 import 'package:app/miswidgets/listdiario.dart';
-import 'package:app/servicios/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() {
 runApp(appDiario());}
-  List<String> orden = ["Desayuno","ColacionM","Comida","ColacionT","Cena"];
+  List<String> orden = ["Desayuno","Colación temprana","Comida","Colación tardía","Cena"];
 class appDiario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -46,9 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     double largo = MediaQuery.sizeOf(context).height;
-    double ancho = MediaQuery.sizeOf(context).height;
-
-
     return Scaffold(
       body: Container(
         height: largo,
@@ -77,7 +72,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             setState(() {
                               fechaSeleccionada = tiempo;
                               print(fechaSeleccionada);
-                              print(DateTime.daysPerWeek);
                             });
                           }
                   }, icon: Icon(Icons.date_range))
@@ -87,21 +81,25 @@ class _MyHomePageState extends State<MyHomePage> {
               child:
        FutureBuilder <List<QueryDocumentSnapshot<Map<String, dynamic>>>>(
         future: obtenerDatos(),
-
         builder: (context,AsyncSnapshot<List<QueryDocumentSnapshot<Map<String, dynamic>>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return Container(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
             } else {
             return ListView.builder(
               itemCount: snapshot.data?.length,
               itemBuilder: (context, i) {
-
-             var datos;
-                datos = snapshot.data?.elementAt(i) ;
-              return Elediario(comida: datos!['nombre'], estado: Estado.registrado,);
-
+              String tiempo = snapshot.data![i].id;
+              QueryDocumentSnapshot<Map<String, dynamic>>? datos;
+              datos = snapshot.data?.elementAt(i) ;
+              return Elediario(
+              comida: datos!['nombre'], 
+              estado: Estado.values[datos['estado']], 
+              fotoRef: datos['imagen'],
+              tiempo:tiempo,
+              descripcion: datos['descripcion'],
+              );
             },
             );
           }
@@ -133,7 +131,6 @@ class _MyHomePageState extends State<MyHomePage> {
     documentosMap[documento.id] = documento;
   }
 
-  // Crear una lista ordenada de documentos según el orden de listaNombres
  List<QueryDocumentSnapshot<Map<String, dynamic>>> documentosOrdenados = [];
   for (var nombre in orden) {
     if (documentosMap.containsKey(nombre)) {

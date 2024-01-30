@@ -42,7 +42,7 @@ class InicioSesion extends StatelessWidget {
     // Define the default brightness and colors.
     colorScheme: ColorScheme.fromSeed(
       seedColor: const Color.fromARGB(255, 39, 176, 48),
-      // ···
+      primary: Colors.green,
       brightness: Brightness.light,
     ),
 
@@ -93,7 +93,7 @@ height: MediaQuery.sizeOf(context).height,
                            children:[
                           
                          
-                                   const Text("Bienvenido",style: TextStyle(fontSize: 50,color: Color.fromARGB(255, 255, 255, 255)), textAlign: TextAlign.left,),
+                         const Text("Bienvenido",style: TextStyle(fontSize: 50,color: Color.fromARGB(255, 255, 255, 255)), textAlign: TextAlign.left,),
                           const Text("Inicia sesion",style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 255, 255, 255)), ),
                           const SizedBox(height: 30,),
                          entradaTexto(),
