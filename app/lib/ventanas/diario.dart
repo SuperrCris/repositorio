@@ -8,9 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-runApp(appDiario());}
+runApp(const AppDiario());}
   List<String> orden = ["Desayuno","Colación temprana","Comida","Colación tardía","Cena"];
-class appDiario extends StatelessWidget {
+class AppDiario extends StatelessWidget {
+  const AppDiario({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     diriconosvg: "recursos/manzana.svg",
                     primercolor: Colors.greenAccent,
                     segundocolor: Colors.yellow,
-                    ruta: appDiario(),
+                    ruta: AppDiario(),
                   ),
                 
                   Botonconicono(

@@ -1,17 +1,11 @@
 import 'dart:io';
-
-import 'package:app/miswidgets/contenedor.dart';
 import 'package:app/miswidgets/estilos/textos.dart';
-import 'package:app/servicios/camara.dart';
 import 'package:app/servicios/otracamara.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Nuevacomida extends StatelessWidget{
-
-
-
+  const Nuevacomida({super.key});
   @override
   Widget build(BuildContext context) {
     return Nc();
@@ -19,12 +13,13 @@ class Nuevacomida extends StatelessWidget{
 }
 
 class Nc extends StatefulWidget{
-  List<PickedFile> imagenes = [];
+  final List<PickedFile> imagenes = [];
   final escogeImagen = ImagePicker();
+
+  Nc({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _Nc();
   }
 }
@@ -33,7 +28,6 @@ class _Nc extends State<Nc>{
   String? selectedColor = 'Desayuno';
 List <PickedFile> imagenes = [];
 final imagePicker = ImagePicker(); 
-  // Lista de colores para mostrar en el menú desplegable
   List<String> colores = ['Desayuno', 'Colación temprana', 'Comida', 'Colación tardia', 'Cena'];
 
 
@@ -133,7 +127,7 @@ if (imagenes.isNotEmpty){
   }
 }
 
- XFile? imagen;
+
 
 
  
