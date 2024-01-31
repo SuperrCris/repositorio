@@ -79,6 +79,13 @@ class AnadirEstado extends State<Anadir>{
               )
             : Container(
                 decoration: BoxDecoration(
+                  boxShadow:  [
+        BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 2,
+        blurRadius: 7,
+        offset: Offset(0, 3), 
+      ),],
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Colors.green,
@@ -102,7 +109,7 @@ Container(
   child: SingleChildScrollView(
     scrollDirection: Axis.vertical,
     child: Text(descripcion,style: 
-    TextStyle(color: Colors.black87,fontSize: 25,height: 1),textAlign: TextAlign.justify,overflow:TextOverflow.clip,)),
+    TextStyle(color: Colors.black87,fontSize: 18,height: 1),textAlign: TextAlign.justify,overflow:TextOverflow.clip,)),
 ),
 
 Expanded(
@@ -120,7 +127,7 @@ SizedBox(height: 10,),
               crossAxisSpacing: 8.0, // Espacio horizontal entre las celdas
               mainAxisSpacing: 8.0, // Espacio vertical entre las celdas
               children: [
-                StaggeredGridTile.extent(crossAxisCellCount:1, mainAxisExtent: 100, child: Btnopcion(texto: "Me alimenté con esto", opcion: Opcion.positivo)),
+                StaggeredGridTile.extent(crossAxisCellCount:1, mainAxisExtent: 100, child: Btnopcion(texto: "Si, asi es", opcion: Opcion.positivo)),
                 StaggeredGridTile.extent(crossAxisCellCount:1, mainAxisExtent: 100, child: Btnopcion(texto: "No me alimente", opcion: Opcion.negativo)),
                 StaggeredGridTile.extent(crossAxisCellCount:2, mainAxisExtent: 100, child: Btnopcion(texto: "Me alimente con algo diferente", opcion: Opcion.otro)),
               ],
@@ -154,7 +161,7 @@ final Opcion opcion;
                     child: Column(
                     children: [
                      Icon(icono(opcion),size: 52,color:Colors.white),
-                       Text(texto,textAlign: TextAlign.center,style: TextStyle( fontFamily: 'figtree', fontSize:30,fontWeight: FontWeight.bold,color: Colors.white),)
+                       Text(texto,textAlign: TextAlign.center,style: TextStyle( fontFamily: 'figtree', fontSize:25,fontWeight: FontWeight.bold,height: 1,color: Colors.white),)
                     ],
                               ),
                   ),
