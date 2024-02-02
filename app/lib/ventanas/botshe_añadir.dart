@@ -2,9 +2,11 @@
 
 import 'package:app/miswidgets/listdiario.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 
@@ -15,15 +17,18 @@ class Anadir extends StatefulWidget{
   final String tiempo;
   final String descripcion;
   final Estado estado;
+  final Function(Estado es) actualizar;
   const Anadir({super.key,
    required this.comida,
     required this.fotoRef,
      required this.tiempo,
       required this.descripcion,
-       required this.estado}): super();
+       required this.estado, 
+       required this.actualizar}): super();
   @override
   State<StatefulWidget> createState() => 
-  AnadirEstado(comida: comida, estado: estado, fotoRef: fotoRef, tiempo: tiempo, descripcion: descripcion);
+  // ignore: no_logic_in_create_state
+  AnadirEstado(comida: comida, estado: estado, fotoRef: fotoRef, tiempo: tiempo, descripcion: descripcion, actualizar: actualizar);
 }
 
 
@@ -33,9 +38,10 @@ class AnadirEstado extends State<Anadir>{
   final String tiempo;
   final String descripcion;
   final Estado estado;
+  final Function actualizar;
   String imageUrl = "";
 
-  AnadirEstado({required this.comida, required this.estado, required this.fotoRef, required this.tiempo, required this.descripcion});
+  AnadirEstado( {required this.comida, required this.estado, required this.fotoRef, required this.tiempo, required this.descripcion, required this.actualizar});
 
   Future<void> downloadImage() async {
     Reference ref = FirebaseStorage.instance
@@ -127,9 +133,9 @@ SizedBox(height: 10,),
               crossAxisSpacing: 8.0, // Espacio horizontal entre las celdas
               mainAxisSpacing: 8.0, // Espacio vertical entre las celdas
               children: [
-                StaggeredGridTile.extent(crossAxisCellCount:1, mainAxisExtent: 100, child: Btnopcion(texto: "Si, asi es", opcion: Opcion.positivo)),
-                StaggeredGridTile.extent(crossAxisCellCount:1, mainAxisExtent: 100, child: Btnopcion(texto: "No me alimente", opcion: Opcion.negativo)),
-                StaggeredGridTile.extent(crossAxisCellCount:2, mainAxisExtent: 100, child: Btnopcion(texto: "Me alimente con algo diferente", opcion: Opcion.otro)),
+                StaggeredGridTile.extent(crossAxisCellCount:1, mainAxisExtent: 100, child: Btnopcion(texto: "Si, asi es", opcion: Opcion.positivo, tiempo: tiempo,estado:Estado.registrado,actualizarTabla: actualizar,)),
+                StaggeredGridTile.extent(crossAxisCellCount:1, mainAxisExtent: 100, child: Btnopcion(texto: "No me alimente", opcion: Opcion.negativo,tiempo: tiempo,estado: Estado.noregistrado,actualizarTabla: actualizar,)),
+                StaggeredGridTile.extent(crossAxisCellCount:2, mainAxisExtent: 100, child: Btnopcion(texto: "Me alimente con algo diferente", opcion: Opcion.otro,tiempo: tiempo,estado: Estado.distinto,actualizarTabla: actualizar,)),
               ],
             ),
         ),
@@ -147,27 +153,69 @@ SizedBox(height: 10,),
 class Btnopcion extends StatelessWidget{
 final String texto;
 final Opcion opcion;
-    Btnopcion({required this.texto,required this.opcion});
+final String tiempo;
+final Estado estado;
+Function actualizarTabla;
+    Btnopcion({super.key, required this.texto,required this.opcion, required this.tiempo, required this.estado, required this.actualizarTabla,});
   @override
 
   Widget build(BuildContext context) {
-    return  Container(
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              gradient: color(opcion),),
-             
-                  child: SizedBox(
-                    height: 100,
-                    child: Column(
-                    children: [
-                     Icon(icono(opcion),size: 52,color:Colors.white),
-                       Text(texto,textAlign: TextAlign.center,style: TextStyle( fontFamily: 'figtree', fontSize:25,fontWeight: FontWeight.bold,height: 1,color: Colors.white),)
-                    ],
-                              ),
-                  ),
-                 
-                          
-           );
+
+
+void marcar(int estado){
+// Obtén una referencia a la colección y al documento que deseas actualizar
+DocumentReference coleccion = FirebaseFirestore.instance
+        .collection('Datos')
+        .doc('Usuarios')
+        .collection('Cristian')
+        .doc('Dietas')
+        .collection('24-01-2024')
+        .doc(tiempo);
+
+
+coleccion.update({
+  'estado': estado,
+})
+    .then((value) {
+      print(estado);
+  print("Campo actualizado correctamente");
+  print(coleccion.toString());
+
+        Navigator.pop(context);
+          actualizarTabla(this.estado);
+
+})
+    .catchError((error) {
+  print("Error al actualizar el campo: $error");
+});
+
+}
+
+    return  GestureDetector(
+      child: Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                gradient: color(opcion),),
+               
+                    child: SizedBox(
+                      height: 100,
+                      child: Column(
+                      children: [
+                       Icon(icono(opcion),size: 52,color:Colors.white),
+                         Text(texto,textAlign: TextAlign.center,style: TextStyle( fontFamily: 'figtree', fontSize:25,fontWeight: FontWeight.bold,height: 1,color: Colors.white),)
+                      ],
+                                ),
+                    ),
+                   
+                            
+             ),
+
+             onTap: (){
+              
+              marcar(estado.index);
+
+             },
+    );
     
 
   }

@@ -42,8 +42,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
    DateTime fechaSeleccionada = DateTime.now();
       String usuario = "Cristian";
+ 
+
   @override
   Widget build(BuildContext context) {
+    
+  
     double largo = MediaQuery.sizeOf(context).height;
     return Scaffold(
       body: Container(

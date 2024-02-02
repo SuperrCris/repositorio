@@ -110,14 +110,14 @@ setState(() {
   }
 
   BoxDecoration decoracion(){
-BoxDecoration bd = BoxDecoration();
+BoxDecoration bd;
 
 if (imagenes.isNotEmpty){
   bd = BoxDecoration(
   image: DecorationImage(image: FileImage(File(imagenes.last.path)),
   fit: BoxFit.cover),);
 } else {
-       bd    =    BoxDecoration(
+       bd = BoxDecoration(
             color:  Color.fromARGB(255, 12, 12, 12), 
           );
 }

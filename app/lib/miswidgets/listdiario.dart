@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:app/ventanas/botshe_a%C3%B1adir.dart';
 import 'package:app/ventanas/botshe_nuevo.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -24,17 +25,17 @@ class Elediario extends StatefulWidget {
       : super();
 
   @override
-  // ignore: no_logic_in_create_state
   State<Elediario> createState() =>
       DiarioEstado(comida, estado, fotoRef, tiempo, descripcion);
 }
 
 class DiarioEstado extends State<Elediario> {
-  final String comida;
-  final Estado estado;
+   String comida;
+   Estado estado;
   final String fotoRef;
   final String tiempo;
   final String descripcion;
+  
   DiarioEstado(
     this.comida,
     this.estado,
@@ -65,7 +66,27 @@ class DiarioEstado extends State<Elediario> {
     super.initState();
     downloadImage();
   }
+void irConfirma(context, String com,String foto,Estado estad,String desc,String tiemp,) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (BuildContext context) {
+      return Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
 
+        child: Anadir(comida: com,fotoRef: foto,estado: estad,descripcion: desc,tiempo: tiemp,
+        actualizar:(e){
+          setState(() {
+            estado = e;
+          });
+        }
+        
+        ),
+      );
+    },
+  );
+}
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -138,20 +159,8 @@ void irConfirmar(BuildContext context) {
   );
 }
 
-void irConfirma(context, String com,String foto,Estado estad,String desc,String tiemp,) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    builder: (BuildContext context) {
-      return Padding(
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        child: Anadir(comida: com,fotoRef: foto,estado: estad,descripcion: desc,tiempo: tiemp,),
-      );
-    },
-  );
-}
 
+ 
 Container marca(Estado _tipo, String url) {
   String ur = url;
   Estado tipo = _tipo;
@@ -253,4 +262,7 @@ Container marca(Estado _tipo, String url) {
   );
   return contenedor;
 }
+
+
+
 
